@@ -1,0 +1,64 @@
+server:
+  port: 8282
+  servlet:
+    context-path: /backend
+  tomcat:
+    connection-timeout: 5000
+    max-threads: 200
+    min-spare-threads: 10
+
+spring:
+  application:
+    name: backend
+  data:
+    mongodb:
+      uri: mongodb://taind:taind@localhost:27019/backend?authSource=admin
+      connection-pool-size: 50
+      max-connection-idle-time: 60000
+      max-connection-life-time: 120000
+    redis:
+      host: localhost
+      port: 1212
+      repositories:
+        enabled: false
+      timeout: 2000
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 2
+          max-wait: -1ms
+
+influxdb:
+  url: http://localhost:8086
+  token: your-super-secret-token
+  org: my-org
+  bucket: sensor_data
+  retention: 30d
+  batch:
+    size: 100
+    flush-duration: 1000
+  connect-timeout: 10s
+  write-timeout: 10s
+  read-timeout: 10s
+
+logging:
+  level:
+    root: INFO
+    com.influxdb.client: INFO
+    com.testbackend.backend: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    #file:
+    # max-size: 10MB
+    # max-history: 10
+    # total-size-cap: 100MB
+
+websocket:
+  endpoint: /chat
+  allowed-origins: "*"
+  max-text-message-size: 8192
+  max-binary-message-size: 8192
+
+#api c?a influxdb
+# jsrNd6Ca4wKlFM_LM36Fj3cS4FNlPmp_V2oqRMkAjDLtzAOSYChlxHr_PsVHXIzg5bntnuNsZoZzdwYJBjJshw==
